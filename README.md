@@ -17,4 +17,7 @@ node script-fake.js
 
 ### Solution #2
 This solution built on Typescript. Existing schema transformed to Types and after this generated the object and saved to file.
+```
+script-ts.ts
+```
 
