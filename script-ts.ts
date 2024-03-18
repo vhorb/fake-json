@@ -1,43 +1,24 @@
+import fs = require('fs');
+import path = require('path');
 
-export interface Attendee {
-  userId: number
-  access: [
-    "view",
-    "modify",
-    "sign",
-    "execute"
-  ]
-  formAccess: [
-    "view",
-    "execute",
-    "execute_view"
-  ]
+import { Meeting } from "./meeting";
+
+type Schema = keyof Meeting | { [k: string]: Schema };
+
+function generate<S extends Schema>(schema: S): TypeFrom<S>;
+function generate(schema: Schema) {
+  switch (schema) {
+    case "string": return "";
+    case "number": return 0;
+    default: return Object.fromEntries(Object.entries(schema).map(([k, v]) => ([k, generate(v)])));
+  }
 }
 
-export interface MySchema {
-  id: string | number
-  title: string
-  description: string
-  startDate: number
-  endDate: number
-  attendees: Attendee[]
-  parentId?: null | string | number
-  locationId?: null | number
-  process?: null | string
-  readOnly?: boolean
-  priorProbability?: null | number
-  channelId?: null | number
-  externalId?: null | string
-  tags?: unknown[]
-  form?: {
-    id: number
-    viewModel?: {
-      [k: string]: unknown
-    }
-    [k: string]: unknown
-  }
-  formValue?: {
-    [k: string]: unknown
-  }
-  [k: string]: unknown
-}
+
+const dataPath = path.join(__dirname, "result/data.json");
+
+const meetingSchema = Schema();
+const meeting: Meeting = generate(meetingSchema);
+
+const outputJson = JSON.stringify(meeting, null, 2);
+fs.writeFileSync(dataPath, outputJson);
