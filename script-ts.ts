@@ -14,7 +14,6 @@ function generate(schema: Schema) {
   }
 }
 
-
 const dataPath = path.join(__dirname, "result/data.json");
 
 const meetingSchema = Schema();
