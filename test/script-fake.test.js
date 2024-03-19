@@ -6,5 +6,5 @@ test('check that file not empty', () => {
   const dataPath = path.join(__dirname, "result/data.json");
 
   resultData = JSON.parse(fs.readFileSync(dataPath, "utf8"));
-  expect(resultData.keys).not.toHaveLength(0);
+  expect(Object.keys(resultData).length).not.toHaveLength(0);
 });
