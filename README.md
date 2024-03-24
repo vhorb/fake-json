@@ -15,9 +15,16 @@ to run script:
 node script-fake.js
 ```
 
-### Solution #2
+### Solution #2 - WIP
 This solution built on Typescript. Existing schema transformed to Types and after this generated the object and saved to file.
 ```
 script-ts.ts
 ```
 
+### Solution #3 
+This solution need additional transformation of JSON schema to JSON instance.   
+To run this script:
+```
+node script-random.js
+```
+Additionally, result output will be in console.
